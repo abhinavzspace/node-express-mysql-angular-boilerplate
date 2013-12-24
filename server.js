@@ -6,13 +6,20 @@
 var express = require('express');
 var http = require('http');
 var path = require('path');
+var swig = require('swig');
 
 var app = express();
 
 // all environments
 //app.set('port', process.env.PORT || 3000);
+app.engine('html', swig.renderFile);
 app.set('views', path.join(__dirname, '/app/views'));
-app.set('view engine', 'jade');
+app.set('view engine', 'html');
+
+// disable swig cache permanently and enable express cache when going in production
+app.set('view cache', false);
+swig.setDefaults({ cache: false });
+
 app.use(express.favicon());
 app.use(express.logger('dev'));
 app.use(express.json());
