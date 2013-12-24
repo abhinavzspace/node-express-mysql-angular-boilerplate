@@ -10,6 +10,26 @@ var swig = require('swig');
 
 var app = express();
 
+
+
+var mysql      = require('mysql');
+var connection = mysql.createConnection({
+    host     : 'localhost',
+    user     : 'root',
+    password : 'mcdonalds'
+});
+
+
+
+connection.query('SELECT 1 + 1 AS solution', function(err, rows, fields) {
+    if (err) throw err;
+
+    console.log('The solution is: ', rows[0].solution);
+});
+
+
+
+
 // all environments
 //app.set('port', process.env.PORT || 3000);
 app.engine('html', swig.renderFile);
@@ -33,6 +53,7 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
+// routes
 require('./config/routes')(app);
 
 var config = require('./config/config')();
