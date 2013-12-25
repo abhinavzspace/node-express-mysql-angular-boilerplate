@@ -11,24 +11,18 @@ var swig = require('swig');
 var app = express();
 
 
-
-var mysql      = require('mysql');
-var connection = mysql.createConnection({
-    host     : 'localhost',
-    user     : 'root',
-    password : 'mcdonalds'
+// create connection to database and filter it to the controllers through routes
+var mysql = require('mysql');
+var pool  = mysql.createPool({
+    host: 'localhost',
+    user: 'root',
+    password: 'mcdonalds',
+    database: 'test'
 });
-
-
-
-connection.query('SELECT 1 + 1 AS solution', function(err, rows, fields) {
-    if (err) throw err;
-
-    console.log('The solution is: ', rows[0].solution);
+app.use(function (req, res, next) {
+    req.pool = pool;
+    next();
 });
-
-
-
 
 // all environments
 //app.set('port', process.env.PORT || 3000);
@@ -39,6 +33,8 @@ app.set('view engine', 'html');
 // disable swig cache permanently and enable express cache when going in production
 app.set('view cache', false);
 swig.setDefaults({ cache: false });
+
+
 
 app.use(express.favicon());
 app.use(express.logger('dev'));
