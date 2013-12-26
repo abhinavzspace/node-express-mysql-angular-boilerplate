@@ -17,7 +17,7 @@ var pool  = mysql.createPool({
     host: 'localhost',
     user: 'root',
     password: 'mcdonalds',
-    database: 'test'
+    database: 'mydb'
 });
 app.use(function (req, res, next) {
     req.pool = pool;

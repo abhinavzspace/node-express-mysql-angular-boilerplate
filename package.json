@@ -8,6 +8,11 @@
   "dependencies": {
     "express": "3.4.7",
     "mysql": "~2.0.0-rc2",
-    "swig": "~1.2.2"
+    "swig": "~1.2.2",
+    "lodash": "latest",
+    "async": "latest",
+    "crypto": "latest",
+    "forever": "latest",
+    "bower": "latest"
   }
 }

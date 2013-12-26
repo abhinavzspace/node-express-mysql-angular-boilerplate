@@ -1,0 +1,8 @@
+{% extends 'layouts/default.html' %}
+{% block content %}
+    {% for val in vals %}
+    {% if loop.first %}<ol>{% endif %}
+        <li>{{ val }}</li>
+        {% if loop.last %}</ol>{% endif %}
+    {% endfor %}
+{% endblock %}

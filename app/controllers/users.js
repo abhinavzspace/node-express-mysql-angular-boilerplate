@@ -7,6 +7,6 @@ exports.render = function(req, res){
     user.getAll(req.pool, function (err, vals) {
         if (err) return console.log("Error: " + err);
         console.log(vals);
-        res.send(vals);
+        res.jsonp(vals);
     });
 };
